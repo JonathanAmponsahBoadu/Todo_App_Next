@@ -1,18 +1,20 @@
 "use client";
 
 // import "./page.css";
-
+import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 export default function TodoHome() {
   const [blur, setblur] = useState(false);
+  const [userId, setUserId] = useState<string>("");
   type Task = {
     id: number;
     task_name: string;
     type: string;
     date: string;
     iscompleted: boolean;
+    user_id: string;
   };
 
   const [Objects, setObjects] = useState<Task[]>([]);
@@ -22,14 +24,25 @@ export default function TodoHome() {
   const dateField = useRef<HTMLInputElement>(null);
   const today = new Date().toISOString().split("T")[0];
 
+  const getUserId = () => {
+    let user_id = localStorage.getItem("user_id");
+    if (!user_id) {
+      user_id = uuidv4();
+      localStorage.setItem("user_id", user_id);
+    }
+    return user_id;
+  };
+
   useEffect(() => {
+    const user_id = getUserId();
+    setUserId(user_id);
     const fetchTasks = async () => {
-      const response = await fetch("/api/tasks");
+      const response = await fetch(`/api/tasks?user_id=${userId}`);
       const data = await response.json();
       setObjects(data.Tasks || []);
     };
     fetchTasks();
-  }, []);
+  }, [userId]);
 
   const toggleDiag = () => {
     if (Diag.current) {
@@ -74,6 +87,7 @@ export default function TodoHome() {
           task_name: task,
           task_type: type,
           date: date,
+          user_id: userId,
         };
         try {
           const response = await fetch("/api/tasks", {
