@@ -3,6 +3,7 @@ import pool from "../../../lib/db";
 export  async function GET() {
     try {
         const result = await pool.query("SELECT * from Tasks_Next");
+        console.log("Conection successful")
 
         return Response.json({message:"Tasks obtained",Tasks: result.rows},{status:200});
     } catch (err) {
