@@ -337,7 +337,7 @@ export default function TodoHome() {
           ></Image>
         )}
 
-        <p className="Last_text flex justify-center items-center absolute -bottom-10 left-1/2 -translate-x-1/2">
+        <p className="Last_text flex justify-center items-center absolute -bottom-12 left-1/2 -translate-x-1/2">
           Get it done, have some fun 🏋️‍♀️📚
         </p>
       </div>
