@@ -1,6 +1,12 @@
-.completeBtn::before {
+/* .completeBtn::before {
   content: " ✅";
   width: 20px;
   height: 20px;
   border-radius: 50%;
+} */
+@media (min-width: 758px) {
+  .container {
+    width: 50vw;
+    margin: 20px auto;
+  }
 }

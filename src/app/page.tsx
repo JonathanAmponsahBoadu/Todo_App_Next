@@ -1,6 +1,6 @@
 "use client";
 
-// import "./page.css";
+import "./page.css";
 import { v4 as uuidv4 } from "uuid";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
@@ -270,7 +270,7 @@ export default function TodoHome() {
         </dialog>
       </form>
 
-      <div className="relative">
+      <div className="container relative">
         {Objects && Objects.length > 0 ? (
           Objects.map((Object, index) => (
             <ul key={index} className={`pl-5 pr-5 pt-1 ${blur && "blur-2xl"}`}>
